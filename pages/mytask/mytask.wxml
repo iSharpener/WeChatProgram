@@ -1,0 +1,16 @@
+<!--文章列表模板 begin-->
+<view class="container">
+<template name="itmes">
+  <navigator url="../../pages/about/about?title=navigate" hover-class="cell">
+     <view class="imgs"><image src="{{imgURL}}" class="in-img" background-size="cover" model="scaleToFill"></image></view>
+    <view class="infos">
+      <view class="title">{{title}}</view>
+      <view class="date">{{time}}</view>
+       <view class="classification">{{classification}}</view>
+    </view>
+    </navigator>
+</template>
+<block wx:for="{{newList}}">
+  <template is="itmes" data="{{...item}}" />
+</block>
+</view>
