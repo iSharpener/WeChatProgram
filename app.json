@@ -2,8 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/mytask/mytask",
-    "pages/about/about"
+    "pages/mytask/mytask"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -24,13 +23,13 @@
         "iconPath": "image/my.png",
         "selectedIconPath": "image/mySelect.png",
         "pagePath": "pages/mytask/mytask",
-        "text": "我的任务"
+        "text": "我的"
       },
       {
         "iconPath": "image/about.png",
         "selectedIconPath": "image/aboutSelect.png",
         "pagePath": "pages/logs/logs",
-        "text": "关于"
+        "text": "日志"
       }
     ]
   }
