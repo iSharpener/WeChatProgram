@@ -2,7 +2,10 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/mytask/mytask"
+    "pages/mytask/mytask",
+    "pages/help/help",
+    "pages/static/static",
+    "pages/about/about"
   ],
   "window":{
     "backgroundTextStyle":"light",

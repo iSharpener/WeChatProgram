@@ -1,16 +1,49 @@
-<!--文章列表模板 begin-->
+<!--myTask.wxml-->
 <view class="container">
-<template name="itmes">
-  <navigator url="../../pages/about/about?title=navigate" hover-class="cell">
-     <view class="imgs"><image src="{{imgURL}}" class="in-img" background-size="cover" model="scaleToFill"></image></view>
-    <view class="infos">
-      <view class="title">{{title}}</view>
-      <view class="date">{{time}}</view>
-       <view class="classification">{{classification}}</view>
+  <view class="userinfo" bindtap='clickStatic'>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <view id='user-image'>
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </view>
+      <view id='user_meta'>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <text class='user-num-static'>0个目标1个习惯</text>
+      </view>
+    </block>
+  </view><!--userinfo结束-->
+
+  <view class='functions'>
+    <view class='help function-item' bindtap='clickHelp'>
+      <view class='funtion-item-content'>
+        <view><text class='item-title'>帮助</text></view>
+        <view><text class='item-discription'>玩转研清单的秘密</text></view>
+      </view>
+      <view class='click_enter'>
+        <image src='../image/arrow-right.png'></image>
+      </view>
     </view>
-    </navigator>
-</template>
-<block wx:for="{{newList}}">
-  <template is="itmes" data="{{...item}}" />
-</block>
+
+    <view class='about function-item' bindtap='clickAbout'>
+      <view class='funtion-item-content'>
+        <view><text class='item-title'>关于</text></view>
+        <view><text class='item-discription'>我们的开发组人员</text></view>
+      </view>
+      <view class='click_enter'>
+        <!--<image src='../image/arrow-right.png'></image>-->
+      </view>
+    </view>
+
+    <view class='reload function-item' bindtap='clickReload'>
+      <view class='funtion-item-content'>
+        <view><text class='item-title'>重新启动</text></view>
+        <view><text class='item-discription'>系统异常时请尝试重新启动</text></view>
+      </view>
+      <view class='click_enter'>
+        <!--<image src='../image/arrow-right.png'></image>-->
+      </view>
+    </view>
+  
+  </view>
+
 </view>

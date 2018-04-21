@@ -1,24 +1,111 @@
- .list{
-  height:100%;
-  display:flex;
+/**index.wxss**/
+
+/*模块主css*/
+.container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: block;
   flex-direction: column;
-  padding:20rpx;
+  /*align-items: center;*/
+  /*justify-content: space-between;*/
+  padding: 0rpx 0;
+  box-sizing: border-box;
+  background: #fafafa;
 } 
 
-navigator{ overflow: hidden;}
-
-.cell{
-  margin-bottom:  20rpx;
-  height: 200rpx;
-  position: relative;
+.userinfo {
+  display: flex;
+  margin: 10px;
+  background: #ffffff;
+  border: 3px;
+  flex-direction: row;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.imgs{
-  float: right;
+.functions{
+  display: flex;
+  flex-direction: column;
+  padding: 10dp;
+  margin: 10px;
+  background: #ffffff;
+  border: 3px;
+  box-sizing: border-box;
 }
 
-.imgs image { 
-  display: block;
-  width: 200rpx;
-  height: 200rpx;
+
+/*用户信息模块*/
+#user_meta{
+  display: flex;
+  width: auto;
+  height: auto;
+  flex-direction: column;
+  justify-content: center;
 }
+
+#user-image{
+  width: auto;
+  height: auto;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  font-weight: 400;
+  color: #000000;
+  font-size: 14px;
+}
+
+.user-num-static {
+  font-weight: 300;
+  color: #666666;
+  font-size: 13px;
+}
+
+/*功能模块*/
+.function-item{
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.user-num-static{
+
+}
+
+.funtion-item-content{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.item-title{
+  font-weight: 400;
+  color: #000000;
+  font-size: 14px;
+}
+
+.item-discription{
+  font-weight: 300;
+  color: #666666;
+  font-size: 13px;
+}
+
+.click_enter{
+  width: 20px;
+  height: 20px;
+}
+
+.click_enter image{
+  width: 20px;
+  height: 20px  
+}
+
