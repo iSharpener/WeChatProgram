@@ -1,4 +1,11 @@
 <!--detail.wxml-->
-<view class="container">
-666666
+<view class='wrap'>
+<view class='container'>
+  <view class='center'><text>版本号:1.0.0</text></view>
+  <view class='center'><text>制作组组长:罗文源</text></view>
+  <view class='center'><text>清单界面设计:肖鹏</text></view>
+  <view class='center'><text>个人主页设计:何炜</text></view>
+  <view class='center'><text>项目管理:Github</text></view>
+</view>
+<view class='bottom'>结题日期:2018-4-22</view>
 </view>
