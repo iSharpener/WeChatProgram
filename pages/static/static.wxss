@@ -1,0 +1,24 @@
+.container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display:flex;
+  flex-direction:column;
+  /*align-items:center;*/
+  /*justify-content:space-between;*/
+  align-items:center;/*垂直居中*/
+  justify-content: center;/*水平居中*/
+
+  box-sizing:border-box;
+  background: #fafafa;
+} 
+
+.center{
+  margin-bottom: 80px;
+}
+
+.font-largex{
+  font-size: 20px;
+}
+
+
