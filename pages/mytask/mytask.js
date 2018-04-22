@@ -25,7 +25,10 @@ Page({
       url: '../static/static'
     })
   },
-  clickReload: function(){
+  clickReload: function () {
+    wx.reLaunch({
+      url: '../index/index'
+    })
     console.log("重新启动");
   },
   onLoad: function () {

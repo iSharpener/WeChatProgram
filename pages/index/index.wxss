@@ -3,7 +3,7 @@
   text-align: center;
   font-size: 40rpx;
   color: #ae9e84;
-  margin-bottom: 40px;
+  margin-bottom: 75px;
   width:100%;
   position: relative;
   height:50px;
@@ -17,7 +17,7 @@
   color: rgba(225,225,225,0.5);
   font-size: 120rpx;
   left: 0;
-  bottom:-50px;
+  bottom:-60px;
 }
 
 .userinfo-nickname {
