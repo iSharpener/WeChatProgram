@@ -2,5 +2,24 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
 
+.title_content{
+  margin-top: 20px;
+
+}
+
+.title_content view{
+  margin-bottom: 10px;
+}
+
+.title_content view text{
+  font-size: 13px;
+  font-weight: 300;
+  color: #666;
+}
+
+.title_view text{
+  font-size: 17px;
+  font-weight: 500;
 }

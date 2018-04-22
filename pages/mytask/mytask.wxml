@@ -8,7 +8,7 @@
       </view>
       <view id='user_meta'>
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-        <text class='user-num-static'>0个目标1个习惯</text>
+        <text class='user-num-static'>坚持记录，培养良好习惯</text>
       </view>
     </block>
   </view><!--userinfo结束-->
