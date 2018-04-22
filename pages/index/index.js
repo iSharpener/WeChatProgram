@@ -2,13 +2,15 @@
 var dataUrl = '../../voice/553534.mp3'
 var util = require("../../utils/util.js");
 
-//更改数组 第三个参数是对象
+//更改数组，第一个参数为原来存储任务的数组，第二个参数为需要改变的任务所在的位置，第三个参数是对象
 function editArr(arr, i, editCnt) {
   let newArr = arr, editingObj = newArr[i];
+  //通过map函数返回用函数处理之后的数组
   newArr.map(function (a) {
     if (a.id == i) {
       for (var x in editCnt) {
         a[x] = editCnt[x];
+        console.log(a[x])
       }
     }
   })
@@ -104,24 +106,29 @@ Page({
       'newLi.needRemind': e.detail.value
     })
   },
-  //修改备忘录
+  //修改任务
   toChange(e) {
     let i = e.target.dataset.id;
-
+   // console.log("点击进行修改:"+i)
     this.setData({
       lists: editArr(this.data.lists, i, { editing: true })
     })
   },
+  //进入修改之后编辑任务
   iptEdit(e) {
     let i = e.target.dataset.id;
+   // console.log("编辑:"+i)
     this.setData({
       lists: editArr(this.data.lists, i, { curVal: e.detail.value })
     })
+
   },
+  //保存修改之后的任务
   saveEdit(e) {
     let i = e.target.dataset.id;
+    console.log(this.data.lists[i].curVal)
     this.setData({
-      lists: editArr(this.data.lists, i, { content: this.data.lists[i].curVal, editing: false })
+      lists: editArr(this.data.lists, i, { content: this.data.lists[i].curVal, editing: false })   
     })
   },
   setDone(e) {
