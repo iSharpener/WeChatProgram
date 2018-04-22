@@ -139,10 +139,9 @@ Page({
   iptEdit(e) {
     let i = e.target.dataset.id;
    // console.log("编辑:"+i)
-    this.setData({
-      lists: editArr(this.data.lists, i, { curVal: e.detail.value })
-    })
-
+    // this.setData({
+    //   lists: editArr(this.data.lists, i, { curVal: e.detail.value })
+    // })
   },
   //保存修改之后的任务
   saveEdit(e) {
@@ -151,7 +150,6 @@ Page({
     this.setData({
       lists: editArr(this.data.lists, i, { content: this.data.lists[i].curVal, editing: false })   
     })
-
     this.saveData();
   },
 

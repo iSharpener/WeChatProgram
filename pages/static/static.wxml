@@ -1,25 +1,14 @@
 <view class="container">
 
-  <view class='center_top'><text class='font-largex'>与你</text></view>
+  <view class='top_container'>
+    <view class='center_top'><text class='font-largex'>与你</text></view>
 
-<<<<<<< HEAD
-  <view class='center'>
-  <text class='font-normal'>相遇的第<text class='font-large'>1</text><text  class='font-normal'>天</text></text>
-=======
     <view class='center'>
       <text class='font-normal'>相遇的第 <text class='font-largex'>{{days}}</text><text  class='font-normal'> 天</text></text>
     </view>
     <view class='center_bottom'><text>坚持记录,发现奇迹</text></view>
->>>>>>> 639bb3f35250a9e379f05c09f4c12b9f73987033
   </view>
-  <view class='center_bottom'><text>坚持记录,发现奇迹</text></view>
 
-<<<<<<< HEAD
-  <view class='divider'></view>
-  <view class='bottom_top'></view>
-  <view class='divider'></view>
-  <view class='bottom'></view>
-=======
   <view class='bottom_container'>
 
     <view class='divider bottom_top_divider'></view>
@@ -43,5 +32,4 @@
     <view class='divider'></view>
     <view class='bottom'></view>
   </view>
->>>>>>> 639bb3f35250a9e379f05c09f4c12b9f73987033
 </view>
