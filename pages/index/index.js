@@ -1,5 +1,5 @@
+var dataUrl = '../../voice/notice.mp3'
 //index.js
-var dataUrl = '../../voice/553534.mp3'
 var util = require("../../utils/util.js");
 
 //更改数组 第三个参数是对象
@@ -27,7 +27,8 @@ Page({
     showAll: true,
     lists: [],
     newLi: { id: '', content: '', begin: util.formatTime2(), needRemind: true, editing: false, done: false },
-    src: 'http://153.37.234.17/mp3.9ku.com/mp3/554/553534.mp3'
+    src: 'https://www.ihewro.com/notice.mp3',
+    logs: []
   },
   onReady: function (e) {
     this.audioCtx = wx.createAudioContext('myAudio');
@@ -49,6 +50,11 @@ Page({
   onLoad: function () {
     var that = this;
     //获取之前保留在缓存里的数据
+    var logs = wx.getStorageSync('todo_logs')
+    if (logs) {
+      this.setData({ logs: logs })
+    }
+
     wx.getStorage({
       key: 'todolist',
       success: function (res) {
@@ -66,6 +72,7 @@ Page({
       })
     })
   },
+
   iptChange(e) {
     this.setData({
       'newLi.content': e.detail.value,
@@ -73,26 +80,37 @@ Page({
     })
   },
 
+  //清空按钮
   formReset() {
     this.setData({
       'newLi.content': ''
     })
   },
+
+  //提交按钮
   formSubmit() {
     let newLists = this.data.lists, i = 0, newTodo = this.data.newLi;
-
+    let logs = this.data.logs;
     if (newLists.length > 0) {
       i = Number(util.sortBy(newLists, 'id', true)[0].id) + 1;
     }
     newTodo.id = i;
     if (newTodo.content != '') {
+      logs.push({
+        timestamp: new Date(),
+        action: '创建',
+        name: newTodo.content
+      })
       newLists.push(newTodo);
       this.setData({
         lists: newLists,
+        logs: logs,
         newLi: { id: '', content: '', begin: util.formatTime2(), needRemind: true, editing: false, done: false }
       })
     }
     this.remind();
+
+    this.saveData();
   },
   beginTime(e) {
     this.setData({
@@ -110,7 +128,10 @@ Page({
 
     this.setData({
       lists: editArr(this.data.lists, i, { editing: true })
-    })
+    });
+
+    this.saveData();
+  
   },
   iptEdit(e) {
     let i = e.target.dataset.id;
@@ -123,62 +144,109 @@ Page({
     this.setData({
       lists: editArr(this.data.lists, i, { content: this.data.lists[i].curVal, editing: false })
     })
+
+    this.saveData();
   },
+
+  //完成任务逻辑
   setDone(e) {
-    let i = e.target.dataset.id, newLists = this.data.lists;
+    let i = e.target.dataset.id;
+    let newLists = this.data.lists;
+    let logs = this.data.logs;
     newLists.map(function (l, index) {
       if (l.id == i) {
         newLists[index].done = !l.done;
         newLists[index].needRemind = false;
+        
+        logs.push({
+          timestamp: new Date(),
+          action: '完成',
+          name: newLists[index].content
+        })
       }
     })
     this.setData({
-      lists: newLists
+      lists: newLists,
+      logs: logs
     })
+
+    this.saveData();
+
   },
+
+  //删除任务逻辑
   toDelete(e) {
-    let i = e.target.dataset.id, newLists = this.data.lists;
+    let i = e.target.dataset.id, newLists = this.data.lists,logs = this.data.logs;
     newLists.map(function (l, index) {
       if (l.id == i) {
+        logs.push({
+          timestamp: new Date(),
+          action: '删除',
+          name: newLists[index].content
+        })
         newLists.splice(index, 1);
+      
       }
     })
     this.setData({
-      lists: newLists
+      lists: newLists,
+      logs: logs
     })
+
+    this.saveData();
   },
+
+  //完成全部任务逻辑
   doneAll() {
     let newLists = this.data.lists;
+    let logs = this.data.logs;
     newLists.map(function (l) {
       l.done = true;
     })
-    this.setData({
-      lists: newLists
+    logs.push({
+      timestamp: new Date(),
+      action: '完成所有任务',
+      name: 所有任务
     })
+    this.setData({
+      lists: newLists,
+      logs: logs
+    })
+
+    this.saveData();
   },
+
+  //删除全部任务逻辑
   deleteAll() {
     this.setData({
       lists: []
     })
+
+    this.saveData();
   },
+
+  //显示没有完成的
   showUnfinished() {
     this.setData({
       showAll: false
     })
   },
+
+  //显示全部事项
   showAll() {
-    //显示全部事项
     this.setData({
       showAll: true
     })
   },
+
+  //保存数据到本地
   saveData() {
-    let listsArr = this.data.lists;
-    wx.setStorage({
-      key: 'todolist',
-      data: listsArr
-    })
+    console.log("保存到本地");
+    wx.setStorageSync('todolist', this.data.lists)
+    wx.setStorageSync('todo_logs', this.data.logs)
   },
+
+  //音频播放
   audioPlay: function () {
     this.audioCtx.play()
   },
@@ -189,6 +257,8 @@ Page({
   audioStart: function () {
     this.audioCtx.seek(0)
   },
+
+
   getRemindArr() {
     let thisLists = this.data.lists, closeT = 0, notDoneLists = [];
     let date = new Date(), now = [date.getHours(), date.getMinutes()];
@@ -206,6 +276,8 @@ Page({
       return false;
     }
   },
+
+  //
   remind() {
     let result = this.getRemindArr(), t = result.closeT, id = result.id, that = this, cnt = result.cnt;
     function alarm() {
