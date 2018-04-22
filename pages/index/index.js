@@ -10,7 +10,6 @@ function editArr(arr, i, editCnt) {
     if (a.id == i) {
       for (var x in editCnt) {
         a[x] = editCnt[x];
-        console.log(a[x])
       }
     }
   })
@@ -111,8 +110,15 @@ Page({
       })
     }
     this.remind();
-
-    this.saveData();
+    console.log("保存到本地");
+    wx.setStorageSync('todolist', this.data.lists)
+    wx.setStorageSync('todo_logs', this.data.logs)
+    wx.showToast({
+      title: '提交任务成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
   beginTime(e) {
     this.setData({
@@ -131,9 +137,6 @@ Page({
     this.setData({
       lists: editArr(this.data.lists, i, { editing: true })
     });
-
-    this.saveData();
-  
   },
   //进入修改之后编辑任务
   iptEdit(e) {
@@ -142,15 +145,33 @@ Page({
     // this.setData({
     //   lists: editArr(this.data.lists, i, { curVal: e.detail.value })
     // })
+    console.log(e.detail.value)
+    this.setData({
+      lists: editArr(this.data.lists, i, { content: e.detail.value })
+    })
   },
   //保存修改之后的任务
   saveEdit(e) {
     let i = e.target.dataset.id;
-    console.log(this.data.lists[i].curVal)
-    this.setData({
-      lists: editArr(this.data.lists, i, { content: this.data.lists[i].curVal, editing: false })   
+    let logs = this.data.logs;
+        logs.push({
+      timestamp: new Date(),
+      action: '修改任务内容',
+      name: '任务'+i
     })
-    this.saveData();
+    this.setData({
+      lists: editArr(this.data.lists, i, {editing: false }), 
+      logs:logs 
+    })
+    console.log("保存到本地");
+    wx.setStorageSync('todolist', this.data.lists)
+    wx.setStorageSync('todo_logs', this.data.logs)
+    wx.showToast({
+      title: '修改数据成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
 
   //完成任务逻辑
@@ -162,21 +183,35 @@ Page({
       if (l.id == i) {
         newLists[index].done = !l.done;
         newLists[index].needRemind = false;
-        
-        logs.push({
-          timestamp: new Date(),
-          action: '完成',
-          name: newLists[index].content
-        })
+        if(newLists[index].done == true){
+          logs.push({
+            timestamp: new Date(),
+            action: '修改为完成',
+            name: newLists[index].content
+          });
+        }
+        if (newLists[index].done == false) {
+          logs.push({
+            timestamp: new Date(),
+            action: '修改为未完成',
+            name: newLists[index].content
+          });
+        }
       }
     })
     this.setData({
       lists: newLists,
       logs: logs
     })
-
-    this.saveData();
-
+    console.log("保存到本地");
+    wx.setStorageSync('todolist', this.data.lists)
+    wx.setStorageSync('todo_logs', this.data.logs)
+    wx.showToast({
+      title: '修改成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
 
   //删除任务逻辑
@@ -197,8 +232,15 @@ Page({
       lists: newLists,
       logs: logs
     })
-
-    this.saveData();
+    console.log("保存到本地");
+    wx.setStorageSync('todolist', this.data.lists)
+    wx.setStorageSync('todo_logs', this.data.logs)
+    wx.showToast({
+      title: '删除任务成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
 
   //完成全部任务逻辑
@@ -207,27 +249,49 @@ Page({
     let logs = this.data.logs;
     newLists.map(function (l) {
       l.done = true;
-    })
+    });
     logs.push({
       timestamp: new Date(),
       action: '完成所有任务',
-      name: 所有任务
+      name: '所有任务'
     })
     this.setData({
       lists: newLists,
       logs: logs
     })
-
-    this.saveData();
+    console.log("保存到本地");
+    wx.setStorageSync('todolist', this.data.lists)
+    wx.setStorageSync('todo_logs', this.data.logs)
+    wx.showToast({
+      title: '完成全部任务',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
 
   //删除全部任务逻辑
   deleteAll() {
+    let logs = this.data.logs;
+    logs.push({
+      timestamp:new Date(),
+      action:'删除所有任务',
+      name:'所有任务'
+    }
+    )
     this.setData({
-      lists: []
+      lists: [],
+      logs:logs
     })
-
-    this.saveData();
+    console.log("保存到本地");
+    wx.setStorageSync('todolist', this.data.lists)
+    wx.setStorageSync('todo_logs', this.data.logs)
+    wx.showToast({
+      title: '删除全部任务',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
 
   //显示没有完成的
@@ -249,6 +313,12 @@ Page({
     console.log("保存到本地");
     wx.setStorageSync('todolist', this.data.lists)
     wx.setStorageSync('todo_logs', this.data.logs)
+    wx.showToast({
+      title: '保存数据成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
 
   //音频播放
@@ -289,7 +359,7 @@ Page({
       that.audioPlay();
       let newLists = that.data.lists;
       wx.showModal({
-        title: '马上去做吧',
+        title: '现在去做这件事？',
         content: cnt,
         success: function (res) {
           if (res.confirm) {
