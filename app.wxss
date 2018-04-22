@@ -3,3 +3,11 @@
   padding: 30rpx;
   border-top: 1rpx solid #e5e5e5;
 } 
+
+/* 横着的分割View样式 */
+/*分割线样式*/
+.divider{
+ background: #dcdcdc;
+ width: 100%;
+ height: 0.5px;
+}

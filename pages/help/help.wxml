@@ -1,0 +1,13 @@
+<view class="container">
+
+  <view class='title_view'>
+    <text>使用帮助</text>
+  </view>
+
+  <view class='title_content'>
+    <view><text>1. 首页：制定你所有计划与备忘的入口</text></view>
+    <view><text>2. 我的：个人用户的资料页面，用来统计信息以及相关的功能模块</text></view>
+    <view><text>3. 日志：你的所有登录日志都记录在这里</text></view>
+  </view>
+
+</view>

@@ -1,6 +1,10 @@
 <!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
+<view class="container">
+  <view class="logs" wx:if="{{ logs.length }}">
+    <view class="item" wx:for="{{ logs }}" wx:key="{{ index }}">
+      <text class="name">任务名称: {{ item.name }}</text>
+      <text class="action">{{ item.action }}</text>
+      <text class="timestamp">[{{ item.timestamp }}]</text>
+    </view>
+  </view>
 </view>
