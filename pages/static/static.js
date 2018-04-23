@@ -36,7 +36,7 @@ Page({
       console.log(todo[i]);
       if (todo[i].action == "创建"){
         recorded ++;
-      } else if (todo[i].action == "完成"){
+      } else if (todo[i].action == "修改为完成"){
         done ++;
       }
     }

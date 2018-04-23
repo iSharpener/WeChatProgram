@@ -25,7 +25,10 @@ Page({
       url: '../static/static'
     })
   },
-  clickReload: function(){
+  clickReload: function () {
+    wx.reLaunch({
+      url: '../index/index'
+    })
     console.log("重新启动");
   },
   onLoad: function () {
@@ -62,6 +65,28 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+
+  cleanLoginData: function(){
+    let logs = [];
+    wx.setStorageSync('logs', logs);
+    wx.showToast({
+      title: '清除登录缓存成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
+  },
+
+  cleanOperData: function(){
+    let logs = [];
+    wx.setStorageSync('todo_logs', logs);
+    wx.showToast({
+      title: '清除操作缓存成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
     })
   }
 })
