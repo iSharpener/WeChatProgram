@@ -43,6 +43,28 @@
         <!--<image src='../image/arrow-right.png'></image>-->
       </view>
     </view>
+  </view>
+
+  <view class='functions'>
+    <view class='cleanLoginData function-item' bindtap='cleanLoginData'>
+      <view class='funtion-item-content'>
+        <view><text class='item-title'>清除登录缓存</text></view>
+        <view><text class='item-discription'>将清空你的登录日志，请谨慎</text></view>
+      </view>
+      <view class='click_enter'>
+        <!--<image src='../image/arrow-right.png'></image>-->
+      </view>
+    </view>
+
+    <view class='cleanOperData function-item' bindtap='cleanOperData'>
+      <view class='funtion-item-content'>
+        <view><text class='item-title'>清除操作缓存</text></view>
+        <view><text class='item-discription'>将清空你的操作日志，请谨慎</text></view>
+      </view>
+      <view class='click_enter'>
+        <!--<image src='../image/arrow-right.png'></image>-->
+      </view>
+    </view>    
   
   </view>
 
