@@ -11,7 +11,7 @@ Page({
   },
 
   //加载数据
-  onLoad: function () {
+  onShow: function () {
     let recorded = 0;
     let done = 0
     let days = 0;
@@ -27,10 +27,10 @@ Page({
       this.setData({ logs: logs })
       this.setData({ logins: logs.length })
     }
-
-    let difference = logs[0] - logs[logs.length-1];//相差的毫秒数
-    days = Math.ceil(difference / (1000 * 60 * 60 * 24));
-
+    if (logs.length >0){
+      let difference = logs[0] - logs[logs.length - 1];//相差的毫秒数
+      days = Math.ceil(difference / (1000 * 60 * 60 * 24));
+    }
     this.setData({logs: logs.length,days: days});
     for(let i =0;i<todo.length;i++){
       console.log(todo[i]);

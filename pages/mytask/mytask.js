@@ -31,7 +31,8 @@ Page({
     })
     console.log("重新启动");
   },
-  onLoad: function () {
+  onShow: function () {
+    console.log("加载数据");
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

@@ -48,7 +48,7 @@ Page({
     })
   },
 
-  onLoad: function () {
+  onShow: function () {
     var that = this;
     //获取之前保留在缓存里的数据
     var logs = wx.getStorageSync('todo_logs')
